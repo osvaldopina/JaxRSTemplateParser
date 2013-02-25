@@ -10,7 +10,7 @@ public class TypeFactory {
 
 	static {
 		primitives.put("void", void.class);
-		primitives.put("booleans", boolean.class);
+		primitives.put("boolean", boolean.class);
 		primitives.put("byte", byte.class);
 		primitives.put("short", short.class);
 		primitives.put("int", int.class);
@@ -34,7 +34,7 @@ public class TypeFactory {
 				.getParameterTypes()[parameterIndex]);
 		return new Type(
 				collectionType
-						.getActualType(method.getParameterTypes()[parameterIndex]),
+						.getActualType(method.getGenericParameterTypes()[parameterIndex]),
 				collectionType);
 	}
 

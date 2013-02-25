@@ -26,7 +26,7 @@ public enum CollectionType {
 			return NONE;
 		}
 	}
-
+	
 	public Class<?> getActualType(java.lang.reflect.Type type) {
 		if (type instanceof ParameterizedType) {
 			ParameterizedType parameterizedType = (ParameterizedType) type;

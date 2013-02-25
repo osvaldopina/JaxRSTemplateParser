@@ -1,31 +1,13 @@
 package com.test.jaxrstemplate.resources;
 
 import com.test.jaxrstemplate.Literal;
+import com.test.jaxrstemplate.tree.Tree;
 
-public class ResourceTree {
+public class ResourceTree extends Tree<JaxRsResourceTreeData> {
 	
-	private ResourceNode root;
-
 
 	public ResourceTree() {
-		root = new ResourceNode(new Literal("/"));
+	    super(new JaxRsResourceTreeData(new Literal("/"),null));
 	}
-
-	
-	public ResourceNode getRoot() {
-		return root;
-	}
-
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

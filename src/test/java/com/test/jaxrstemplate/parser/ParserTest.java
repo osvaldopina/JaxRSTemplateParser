@@ -6,11 +6,8 @@ import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
-import com.test.jaxrstemplate.JaxRsTemplate;
 import com.test.jaxrstemplate.Literal;
 import com.test.jaxrstemplate.Variable;
-import com.test.jaxrstemplate.parser.Parser;
-import com.test.jaxrstemplate.parser.Source;
 import com.test.jaxrstemplate.parser.token.Tokenizer;
 
 public class ParserTest {
@@ -51,32 +48,6 @@ public class ParserTest {
         assertEquals("var1", variable.getName());
     }
     
-
-    @Test
-    public void Uri() {
-        parser = createParser("jaxrs{var1}template");
-        Literal literal;
-        Variable variable;
-        
-        JaxRsTemplate uriTemplate = JaxRsTemplate.parse("uri{+var1,var2*,var3:30}template"); 
-        
-        assertEquals(Literal.class,uriTemplate.getParts().get(0).getClass());
-        assertEquals(Variable.class,uriTemplate.getParts().get(1).getClass());
-        assertEquals(Literal.class,uriTemplate.getParts().get(2).getClass());
-
-        literal = (Literal) uriTemplate.getParts().get(0);
-        assertEquals("uri", literal.getValue());
-
-                
-        variable = (Variable) uriTemplate.getParts().get(1);
-        assertEquals("var1",variable.getName());
-
-        literal = (Literal) uriTemplate.getParts().get(2);
-        assertEquals("template", literal.getValue());
-        
-        
-    }
-
 
     private Parser createParser(String text) {
         source = new Source(text);

@@ -1,6 +1,7 @@
 package com.test.jaxrstemplate.discover;
 
 import com.test.type.Type;
+import com.test.type.TypeFactory;
 
 public class Parameter {
     
@@ -24,7 +25,12 @@ public class Parameter {
     }
     
     public String toString() {
-    	return name +" " + type.toString();
+    	return name +":" + type.toString();
+    }
+    
+    public static Parameter fromString(String parameterAsString) {
+        String parameterParts[] = parameterAsString.split(":");
+        return new Parameter(parameterParts[0], TypeFactory.createFromString(parameterParts[1]));
     }
     
     

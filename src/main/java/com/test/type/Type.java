@@ -23,7 +23,7 @@ public class Type {
 	public String toString() {
 		return collectionType.toString(javaClass);
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
