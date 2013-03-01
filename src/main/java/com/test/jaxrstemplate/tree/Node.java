@@ -1,5 +1,6 @@
 package com.test.jaxrstemplate.tree;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -9,7 +10,7 @@ public class Node<T> {
      
     private Node<T> parent;
     
-    private List<Node<T>> children;
+    private List<Node<T>> children = new ArrayList<Node<T>>();
     
     public Node(T data) {
         this.data = data;
@@ -27,6 +28,15 @@ public class Node<T> {
         return Collections.unmodifiableList(children);
     }
     
+    public boolean hasChild(Node<T> childToVerify) {
+        for (Node<T> child:children) {
+            if (child.getData().equals(childToVerify.getData())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public void addChild(Node<T> child) {
         child.setParent(this);
         children.add(child);
@@ -38,30 +48,51 @@ public class Node<T> {
     
     @Override
     public String toString() {
-        return toString(this, 0);
+        return toString(this);
     }
     
-    private String toString(Node<T> node, int level) {
+    private String toString(Node<T> node) {
         StringBuffer tmp = new StringBuffer();
-        tmp.append(repeatCharacter('-', level));
-        tmp.append(node.getData().toString());
-        level ++;
-        for (Node<T> child: getChildren()) {
-            tmp.append('\n');
-            tmp.append(toString(child,level));
+        if (node.getData() != null) {
+            tmp.append(node.getIdentation());
+            tmp.append(node.getData().toString());
+            tmp.append("\n");
+        }
+        else {
+            tmp.append("null");
+        }
+        for (Node<T> child: node.getChildren()) {
+            tmp.append(toString(child));
         }
         return tmp.toString();
     }
     
-    private String repeatCharacter(char character, int times) {
+    public int getLevel() {
+        int i=0;
+        Node<T> node = this;
+        while(node.getParent() != null) {
+            i ++;
+            node = node.getParent();
+        }
+        return i;
+    }
+    
+    public Node<T> getRoot() {
+        Node<T> node = this;
+        
+        while(node.getParent() != null) {
+            node = node.getParent();
+        }
+        
+        return node;
+    }
+
+    public String getIdentation() {
         StringBuffer tmp = new StringBuffer();
-        for (int i = 0; i <= times ; i++) {
-            tmp.append(character);
-            tmp.append(character);
+        for (int i = 0; i < getLevel() ; i++) {
+            tmp.append(" ");
         }
         return tmp.toString();
     }
-    
-    
 
 }

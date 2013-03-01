@@ -7,6 +7,8 @@ import java.util.Map;
 public class TypeFactory {
 
 	private static Map<String, Class<?>> primitives = new HashMap<String, Class<?>>();
+	
+	private static Type voidType = new Type(null, CollectionType.NONE); 
 
 	static {
 		primitives.put("void", void.class);
@@ -18,6 +20,10 @@ public class TypeFactory {
 		primitives.put("float", float.class);
 		primitives.put("double", double.class);
 	}
+	
+	public static void addToPrimitives(String typeName, Class<?> typeClass) {
+	    primitives.put(typeName, typeClass);
+	}
 
 	public static Type createFromMethodReturn(Method method) {
 
@@ -25,6 +31,10 @@ public class TypeFactory {
 				.getReturnType());
 		return new Type(collectionType.getActualType(method
 				.getGenericReturnType()), collectionType);
+	}
+	
+	public static Type getVoidType() {
+	    return voidType;
 	}
 
 	public static Type createFromMethodParameter(Method method,

@@ -14,6 +14,8 @@ import javax.ws.rs.QueryParam;
 
 import org.junit.Test;
 
+import com.test.type.CollectionType;
+import com.test.type.Type;
 import com.test.type.TypeFactory;
 
 public class JaxrsReflectionUtilsTest {
@@ -82,6 +84,22 @@ public class JaxrsReflectionUtilsTest {
         
         assertEquals(0, queryParameters.size());
     }
+
+    @Test
+    public void getPayloadParameterTypeCreateResouce() throws Exception {
+        Type type = JaxrsReflectionUtils.getPayloadParameterType(MyServiceClass.class.getMethod("createResource", String.class));
+        
+        assertEquals(CollectionType.NONE, type.getCollectionType());
+        assertEquals(String.class , type.getJavaClass());
+    }
+
+    @Test
+    public void getPayloadParameterTypeGetResorce() throws Exception {
+        Type type = JaxrsReflectionUtils.getPayloadParameterType(MyServiceClass.class.getMethod("getResource", int.class));
+        
+        assertEquals(TypeFactory.getVoidType(), type);
+    }
+    
     
     @Test
     public void concatPathsNoSlash() throws Exception {

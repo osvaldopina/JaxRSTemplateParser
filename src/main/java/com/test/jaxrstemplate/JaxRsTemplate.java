@@ -1,5 +1,6 @@
 package com.test.jaxrstemplate;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,8 +20,18 @@ public class JaxRsTemplate implements TemplatePart {
     
     private List<TemplatePart> parts;
     
+    public JaxRsTemplate() {
+        this.parts = new ArrayList<TemplatePart>();
+    }
+
+    public JaxRsTemplate(TemplatePart templatePart) {
+        this.parts = new ArrayList<TemplatePart>();
+        this.parts.add(templatePart);
+    }
+
+    
     public JaxRsTemplate(List<TemplatePart> parts) {
-        this.parts = parts;
+        this.parts = new ArrayList<TemplatePart>(parts);
     }
     
     
@@ -36,6 +47,24 @@ public class JaxRsTemplate implements TemplatePart {
             tmp.append(templatePart.toUri());
         }
         return tmp.toString();
+    }
+    
+    public JaxRsTemplate getSubTemplateUntilFirstVariable() {
+        String uri = toUri();
+        String subUri = uri.substring(0,uri.indexOf("{")==-1?uri.length():uri.indexOf("{")-1);
+        return JaxRsTemplate.parse(subUri);
+    }
+    
+    public String[] getUriResources() {
+        String uri = toUri();
+        String[] resources = uri.split("/");
+        List<String> realResouces = new ArrayList<String>();
+        for(String resource:resources) {
+            if (!resource.trim().equals("")) {
+                realResouces.add(resource);
+            }
+        }
+        return realResouces.toArray(new String[] {});
     }
 
 }

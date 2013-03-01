@@ -5,8 +5,12 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.CookieParam;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.MatrixParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -18,8 +22,7 @@ import com.test.type.TypeFactory;
 
 public class JaxrsReflectionUtils {
 
-
-     public static String getHttpMethod(Method method) {
+    public static String getHttpMethod(Method method) {
 
         if (method.getAnnotation(GET.class) != null) {
             return "GET";
@@ -57,7 +60,7 @@ public class JaxrsReflectionUtils {
         Annotation[][] paramAnnotations = method.getParameterAnnotations();
 
         List<Parameter> queryParameters = new ArrayList<Parameter>();
-        
+
         for (int i = 0; i < paramAnnotations.length; i++) {
             for (int j = 0; j < paramAnnotations[i].length; j++) {
                 if (paramAnnotations[i][j] instanceof QueryParam) {
@@ -70,13 +73,13 @@ public class JaxrsReflectionUtils {
 
         return queryParameters;
     }
-    
+
     public static List<Parameter> getPathParameters(Method method) {
 
         Annotation[][] paramAnnotations = method.getParameterAnnotations();
 
         List<Parameter> queryParameters = new ArrayList<Parameter>();
-        
+
         for (int i = 0; i < paramAnnotations.length; i++) {
             for (int j = 0; j < paramAnnotations[i].length; j++) {
                 if (paramAnnotations[i][j] instanceof PathParam) {
@@ -90,6 +93,29 @@ public class JaxrsReflectionUtils {
         return queryParameters;
     }
 
+    public static Type getPayloadParameterType(Method method) {
+        Annotation[][] paramAnnotations = method.getParameterAnnotations();
+
+        for (int i = 0; i < paramAnnotations.length; i++) {
+            int numJaxrsParamAnnotations = 0;
+            for (int j = 0; j < paramAnnotations[i].length; j++) {
+                if (hasParameterAnnotation(paramAnnotations[i][j])) {
+                    numJaxrsParamAnnotations ++;
+                }
+            }
+            if (numJaxrsParamAnnotations ==0) {
+                return TypeFactory.createFromMethodParameter(method, i);
+            }
+        }
+
+        return TypeFactory.getVoidType();
+    }
+
+    private static boolean hasParameterAnnotation(Annotation annotation) {
+        return annotation instanceof PathParam || annotation instanceof QueryParam || annotation instanceof MatrixParam
+                || annotation instanceof HeaderParam || annotation instanceof FormParam
+                || annotation instanceof CookieParam;
+    }
 
     public static String concatPaths(String path1, String path2) {
         if (path1.endsWith("/") && (!path2.startsWith("/"))) {
@@ -97,17 +123,11 @@ public class JaxrsReflectionUtils {
         } else if (!path1.endsWith("/") && (path2.startsWith("/"))) {
             return path1 + path2;
         } else if (path1.endsWith("/") && (path2.startsWith("/"))) {
-        	return path1 + path2.substring(1);
+            return path1 + path2.substring(1);
         } else {
             return path1 + "/" + path2;
         }
-        
-        
+
     }
-
-
-    
-    
-
 
 }

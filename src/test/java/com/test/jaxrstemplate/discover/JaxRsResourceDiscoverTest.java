@@ -31,34 +31,27 @@ public class JaxRsResourceDiscoverTest {
         }
 
         assertTrue(jaxrsResourcesAsString
-                .contains("java.lang.String GET /service/name/{id} path-params[id:int] query-params[]"));
+                .contains("java.lang.String void GET /service/name/{id} path-params[id:int] query-params[]"));
         assertTrue(jaxrsResourcesAsString
-                .contains("LIST<java.lang.String> GET /service/name path-params[] query-params[partial-name:java.lang.String]"));
-        assertTrue(jaxrsResourcesAsString.contains("void POST /service/name path-params[] query-params[]"));
-        assertTrue(jaxrsResourcesAsString.contains("void PUT /service/name/{id} path-params[id:int] query-params[]"));
+                .contains("LIST<java.lang.String> void GET /service/name path-params[] query-params[partial-name:java.lang.String]"));
+        assertTrue(jaxrsResourcesAsString.contains("void java.lang.String POST /service/name path-params[] query-params[]"));
+        assertTrue(jaxrsResourcesAsString.contains("void java.lang.String PUT /service/name/{id} path-params[id:int] query-params[]"));
 
     }
 
     @Test
     public void getResourcesFromString() {
 
-        assertEquals(
-                JaxrsResource.fromString("java.lang.String GET /service/name/{id} path-params[id:int] query-params[]")
-                        .toString(), "java.lang.String GET /service/name/{id} path-params[id:int] query-params[]");
+        String resource1 = "java.lang.String void GET /service/name/{id} path-params[id:int] query-params[]";
+        String resource2 =
+                "LIST<java.lang.String> void GET /service/name path-params[] query-params[partial-name:java.lang.String]";
+        String resource3 = "void java.lang.String POST /service/name path-params[] query-params[]";
+        String resource4 = "void java.lang.String PUT /service/name/{id} path-params[id:int] query-params[]";
 
-        assertEquals(
-                JaxrsResource
-                        .fromString(
-                                "LIST<java.lang.String> GET /service/name path-params[] query-params[partial-name:java.lang.String]")
-                        .toString(),
-                "LIST<java.lang.String> GET /service/name path-params[] query-params[partial-name:java.lang.String]");
-
-        assertEquals(JaxrsResource.fromString("void POST /service/name path-params[] query-params[]").toString(),
-                "void POST /service/name path-params[] query-params[]");
-
-        assertEquals(JaxrsResource.fromString("void PUT /service/name/{id} path-params[id:int] query-params[]")
-                .toString(), "void PUT /service/name/{id} path-params[id:int] query-params[]");
-
+        assertEquals(JaxrsResource.fromString(resource1).toString(), resource1);
+        assertEquals(JaxrsResource.fromString(resource2).toString(), resource2);
+        assertEquals(JaxrsResource.fromString(resource3).toString(), resource3);
+        assertEquals(JaxrsResource.fromString(resource4).toString(), resource4);
     }
 
     @Path("/service")
@@ -83,7 +76,7 @@ public class JaxRsResourceDiscoverTest {
 
         @PUT
         @Path("name/{id}")
-        public void updateResource(@PathParam("id") int id) {
+        public void updateResource(@PathParam("id") int id, String name) {
         }
 
     }

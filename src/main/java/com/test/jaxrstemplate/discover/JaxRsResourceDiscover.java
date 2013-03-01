@@ -47,6 +47,8 @@ public class JaxRsResourceDiscover {
         
         Type type =  TypeFactory.createFromMethodReturn(method);
         
+        Type payloadType = JaxrsReflectionUtils.getPayloadParameterType(method);
+        
          String httpMethod = JaxrsReflectionUtils.getHttpMethod(method);
 
          List<Parameter> queryParameters = JaxrsReflectionUtils.getQueryParameters(method);
@@ -55,7 +57,7 @@ public class JaxRsResourceDiscover {
 
          JaxRsTemplate template = JaxRsTemplate.parse(JaxrsReflectionUtils.concatPaths(classPath, JaxrsReflectionUtils.getMethodPath(method)));
          
-         return new JaxrsResource(type, httpMethod, queryParameters, pathParameters, template);
+         return new JaxrsResource(type, payloadType, httpMethod, queryParameters, pathParameters, template);
 
     }
 
