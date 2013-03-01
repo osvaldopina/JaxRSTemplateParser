@@ -20,9 +20,9 @@ public class NodeTest {
         
         StringBuffer expected = new StringBuffer();
         expected.append("root\n");
-        expected.append("  child1\n");
-        expected.append("    granChild1\n");
-        expected.append("  child2\n");
+        expected.append(" child1\n");
+        expected.append("  granChild1\n");
+        expected.append(" child2\n");
         assertEquals(expected.toString(),root.toString());
     }
 

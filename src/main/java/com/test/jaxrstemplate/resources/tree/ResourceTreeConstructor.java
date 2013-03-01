@@ -21,18 +21,18 @@ public class ResourceTreeConstructor {
     }
 
     private static void addToTree(Node<ResourceNodeData> node, JaxrsResource resource, int partIndex) {
-        Node<ResourceNodeData> nodeToAdd = new Node<ResourceNodeData>(new ResourceNodeData(resource.getResourceParts().get(partIndex),null));
+        Node<ResourceNodeData> nodeToAdd = new Node<ResourceNodeData>(new ResourceNodeData(resource.getResourceParts().get(partIndex)));
         nodeToAdd.getData().setNode(nodeToAdd);
         Node<ResourceNodeData> currentNode; 
-        if (! node.hasChild(nodeToAdd)) {
+        if (node.getChild(nodeToAdd) == null) {
             node.addChild(nodeToAdd);
             currentNode = nodeToAdd;
         }
         else {
-            currentNode = node;
+            currentNode = node.getChild(nodeToAdd);
         }
         if (partIndex == resource.getResourceParts().size() -1) {
-            currentNode.getData().setResource(resource);
+            currentNode.getData().addResource(resource);
         }
         if (partIndex < resource.getResourceParts().size() -1) {
             partIndex ++;

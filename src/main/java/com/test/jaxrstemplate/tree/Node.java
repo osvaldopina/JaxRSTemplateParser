@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.test.jaxrstemplate.resources.tree.ResourceNodeData;
+
 public class Node<T> {
     
     private T data;
@@ -28,13 +30,13 @@ public class Node<T> {
         return Collections.unmodifiableList(children);
     }
     
-    public boolean hasChild(Node<T> childToVerify) {
+    public Node<T> getChild(Node<T> childToGet) {
         for (Node<T> child:children) {
-            if (child.getData().equals(childToVerify.getData())) {
-                return true;
+            if (child.getData().equals(childToGet.getData())) {
+                return child;
             }
         }
-        return false;
+        return null;
     }
     
     public void addChild(Node<T> child) {

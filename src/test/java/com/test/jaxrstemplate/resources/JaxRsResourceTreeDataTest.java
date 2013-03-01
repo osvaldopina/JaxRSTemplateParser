@@ -59,8 +59,8 @@ public class JaxRsResourceTreeDataTest {
         expected.append("  Operation[READ]   java.lang.String void GET /invoice/{invoice-id} path-params[invoice-id:int] query-params[]\n");
         expected.append("  Operation[CREATE]   java.lang.String java.lang.String POST /invoice path-params[] query-params[]\n");
         expected.append("  Operation[UPDATE]   void java.lang.String PUT /invoice/{invoice-id} path-params[invoice-id:int] query-params[]\n");
-        expected.append("  Resource[customer]\n"); 
-        expected.append("    Operation[READ]   java.lang.String void GET /invoice/{invoice-id} path-params[invoice-id:int] query-params[]\n");
+        expected.append(" Resource[customer]\n"); 
+        expected.append("   Operation[READ]   java.lang.String void GET /invoice/{invoice-id} path-params[invoice-id:int] query-params[]\n");
 
         assertEquals(expected.toString(), nodeParent.toString());
         
