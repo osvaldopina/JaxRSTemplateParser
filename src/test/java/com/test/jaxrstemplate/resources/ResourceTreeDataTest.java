@@ -7,11 +7,10 @@ import org.entitatemindex.jaxrs.template.Literal;
 import org.junit.Test;
 
 
-public class ResourceTreeTest {
+public class ResourceTreeDataTest {
 
     @Test
     public void toStringSingleNode() {
-        
         
         ResourceTreeData data = new ResourceTreeData(new Literal("invoice"));
         data.addOperation(Operation.SEARCH,JaxrsResource.createFromString("LIST<java.lang.String> void GET /invoice path-params[] query-params[customer-name:java.lang.String]"));
@@ -21,21 +20,17 @@ public class ResourceTreeTest {
         
         ResourceNode node = new ResourceNode(data);
         
-        ResourceTree resourceTree = new ResourceTree("/");
-        resourceTree.getRoot().addChild(node);
-        
         
         
         StringBuffer expected = new StringBuffer();
         
-        expected.append("Root[/]\n"); 
-        expected.append(" Resource[invoice]\n"); 
-        expected.append("   Operation[SEARCH]   LIST<java.lang.String> void GET /invoice path-params[] query-params[customer-name:java.lang.String]\n");
-        expected.append("   Operation[READ]   java.lang.String void GET /invoice/{invoice-id} path-params[invoice-id:int] query-params[]\n");
-        expected.append("   Operation[CREATE]   java.lang.String java.lang.String POST /invoice path-params[] query-params[]\n");
-        expected.append("   Operation[UPDATE]   void java.lang.String PUT /invoice/{invoice-id} path-params[invoice-id:int] query-params[]\n");
+        expected.append("Resource[invoice]\n"); 
+        expected.append("  Operation[SEARCH]   LIST<java.lang.String> void GET /invoice path-params[] query-params[customer-name:java.lang.String]\n");
+        expected.append("  Operation[READ]   java.lang.String void GET /invoice/{invoice-id} path-params[invoice-id:int] query-params[]\n");
+        expected.append("  Operation[CREATE]   java.lang.String java.lang.String POST /invoice path-params[] query-params[]\n");
+        expected.append("  Operation[UPDATE]   void java.lang.String PUT /invoice/{invoice-id} path-params[invoice-id:int] query-params[]\n");
 
-        assertEquals(expected.toString(), resourceTree.toString());
+        assertEquals(expected.toString(), node.toString());
         
     }
     
@@ -49,10 +44,6 @@ public class ResourceTreeTest {
         dataParent.addOperation(Operation.UPDATE,JaxrsResource.createFromString("void java.lang.String PUT /invoice/{invoice-id} path-params[invoice-id:int] query-params[]"));
         
         ResourceNode nodeParent = new ResourceNode(dataParent);
-  
-        ResourceTree resourceTree = new ResourceTree("/");
-        resourceTree.getRoot().addChild(nodeParent);
-        
         
         ResourceTreeData dataChild = new ResourceTreeData(new Literal("customer"));
         dataChild.addOperation(Operation.READ,JaxrsResource.createFromString("java.lang.String void GET /invoice/{invoice-id} path-params[invoice-id:int] query-params[]"));
@@ -63,17 +54,17 @@ public class ResourceTreeTest {
         
         StringBuffer expected = new StringBuffer();
         
-        expected.append("Root[/]\n"); 
-        expected.append(" Resource[invoice]\n"); 
-        expected.append("   Operation[SEARCH]   LIST<java.lang.String> void GET /invoice path-params[] query-params[customer-name:java.lang.String]\n");
+        expected.append("Resource[invoice]\n"); 
+        expected.append("  Operation[SEARCH]   LIST<java.lang.String> void GET /invoice path-params[] query-params[customer-name:java.lang.String]\n");
+        expected.append("  Operation[READ]   java.lang.String void GET /invoice/{invoice-id} path-params[invoice-id:int] query-params[]\n");
+        expected.append("  Operation[CREATE]   java.lang.String java.lang.String POST /invoice path-params[] query-params[]\n");
+        expected.append("  Operation[UPDATE]   void java.lang.String PUT /invoice/{invoice-id} path-params[invoice-id:int] query-params[]\n");
+        expected.append(" Resource[customer]\n"); 
         expected.append("   Operation[READ]   java.lang.String void GET /invoice/{invoice-id} path-params[invoice-id:int] query-params[]\n");
-        expected.append("   Operation[CREATE]   java.lang.String java.lang.String POST /invoice path-params[] query-params[]\n");
-        expected.append("   Operation[UPDATE]   void java.lang.String PUT /invoice/{invoice-id} path-params[invoice-id:int] query-params[]\n");
-        expected.append("  Resource[customer]\n"); 
-        expected.append("    Operation[READ]   java.lang.String void GET /invoice/{invoice-id} path-params[invoice-id:int] query-params[]\n");
 
-        assertEquals(expected.toString(), resourceTree.toString());
+        assertEquals(expected.toString(), nodeParent.toString());
         
     }
+
 
 }

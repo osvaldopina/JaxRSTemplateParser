@@ -1,8 +1,8 @@
 package com.test.jaxrstemplate.resources;
 
-import com.test.jaxrstemplate.tree.Tree;
+import org.entitatemindex.utils.Tree;
 
-public class ResourceTree extends Tree<JaxRsResourceTreeData> {
+public class ResourceTree extends Tree<ResourceTreeData> {
 	
 
 	public ResourceTree(String basePath) {

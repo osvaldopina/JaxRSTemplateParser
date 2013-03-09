@@ -2,6 +2,7 @@ package com.test.jaxrstemplate.tree;
 
 import static org.junit.Assert.assertEquals;
 
+import org.entitatemindex.utils.Node;
 import org.junit.Test;
 
 public class NodeTest {

@@ -1,10 +1,10 @@
 package com.test.jaxrstemplate.resources;
 
-import com.test.jaxrstemplate.tree.Node;
+import org.entitatemindex.utils.Node;
 
-public class ResourceNode extends Node<JaxRsResourceTreeData>{
+public class ResourceNode extends Node<ResourceTreeData>{
 
-    public ResourceNode(JaxRsResourceTreeData data) {
+    public ResourceNode(ResourceTreeData data) {
         super(data);
         data.setNode(this);
     }

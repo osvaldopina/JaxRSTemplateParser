@@ -1,9 +1,9 @@
 package com.test.jaxrstemplate.resources;
 
-import com.test.jaxrstemplate.Literal;
+import org.entitatemindex.jaxrs.template.Literal;
 
 
-public class RootTreeData extends JaxRsResourceTreeData {
+public class RootTreeData extends ResourceTreeData {
     
 
     public RootTreeData(String basePath) {
