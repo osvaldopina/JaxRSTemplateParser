@@ -39,10 +39,8 @@ public class JaxrsTemplate extends UnmodifiableList<TemplatePart> {
     @Override
     public String toString() {
         StringBuffer tmp = new StringBuffer();
-        boolean first = true;
-        for(int i=0; i< size() ; i++) {
-            first = StringUtils.addIfNotFirst(first, tmp, "/");
-            tmp.append(get(i).getValue());
+        for(TemplatePart templatePart:this) {
+            tmp.append(templatePart.getValue());
         }
         return tmp.toString();
     }

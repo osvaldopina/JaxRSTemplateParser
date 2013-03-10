@@ -25,12 +25,12 @@ public class JaxrsResourceTreeConstructor {
         Node<JaxrsResourceNodeData> nodeToAdd = new Node<JaxrsResourceNodeData>(new JaxrsResourceNodeData(resource.getResourceParts().get(partIndex)));
         nodeToAdd.getData().setNode(nodeToAdd);
         Node<JaxrsResourceNodeData> currentNode; 
-        if (node.getChild(nodeToAdd) == null) {
+        if (node.hasChildSameData(nodeToAdd) == null) {
             node.addChild(nodeToAdd);
             currentNode = nodeToAdd;
         }
         else {
-            currentNode = node.getChild(nodeToAdd);
+            currentNode = node.hasChildSameData(nodeToAdd);
         }
         if (partIndex == resource.getResourceParts().size() -1) {
             currentNode.getData().addResource(resource);

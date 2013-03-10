@@ -47,7 +47,7 @@ public class JaxrsResouceTreeFactoryTest {
         StringBuffer tmp = new StringBuffer();
 
         tmp.append("/\n");
-        tmp.append("  a  [GET /a]\n");
+        tmp.append(" a  [GET /a]\n");
 
         assertEquals(tmp.toString(), resourceTree.toString());
     }
@@ -64,9 +64,9 @@ public class JaxrsResouceTreeFactoryTest {
         StringBuffer tmp = new StringBuffer();
 
         tmp.append("/\n");
-        tmp.append("  a\n");
-        tmp.append("    {b}\n");
-        tmp.append("      c  [GET /a/{b}/c]\n");
+        tmp.append(" a\n");
+        tmp.append("  {b}\n");
+        tmp.append("   c  [GET /a/{b}/c]\n");
 
         assertEquals(tmp.toString(), resourceTree.toString());
     }
@@ -83,7 +83,7 @@ public class JaxrsResouceTreeFactoryTest {
         StringBuffer tmp = new StringBuffer();
 
         tmp.append("/\n");
-        tmp.append("  a  [GET /a, PUT /a]\n");
+        tmp.append(" a  [GET /a, PUT /a]\n");
 
         assertEquals(tmp.toString(), resourceTree.toString());
     }
@@ -100,8 +100,8 @@ public class JaxrsResouceTreeFactoryTest {
         StringBuffer tmp = new StringBuffer();
 
         tmp.append("/\n");
-        tmp.append("  a  [PUT /a]\n");
-        tmp.append("    b  [GET /a/b]\n");
+        tmp.append(" a  [PUT /a]\n");
+        tmp.append("  b  [GET /a/b]\n");
 
         assertEquals(tmp.toString(), resourceTree.toString());
     }
@@ -119,11 +119,11 @@ public class JaxrsResouceTreeFactoryTest {
         StringBuffer tmp = new StringBuffer();
 
         tmp.append("/\n");
-        tmp.append("  a\n");
-        tmp.append("    b\n");
-        tmp.append("      c  [GET /a/b/c]\n");
-        tmp.append("    c\n");
-        tmp.append("      d  [GET /a/c/d]\n");
+        tmp.append(" a\n");
+        tmp.append("  b\n");
+        tmp.append("   c  [GET /a/b/c]\n");
+        tmp.append("  c\n");
+        tmp.append("   d  [GET /a/c/d]\n");
 
         assertEquals(tmp.toString(), resourceTree.toString());
     }

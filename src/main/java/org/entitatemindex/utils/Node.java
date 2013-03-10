@@ -28,18 +28,24 @@ public class Node<T> {
         return Collections.unmodifiableList(children);
     }
     
-    public Node<T> getChild(Node<T> childToGet) {
+    public boolean hasChildSameData(Node<T> childToGet) {
+    	return getChildSameData(childToGet) != null;
+    }
+    
+    public Node<T> getChildSameData(Node<T> childToGet) {
         for (Node<T> child:children) {
-            if (child.equals(childToGet)) {
+            if (child.sameData(childToGet)) {
                 return child;
             }
         }
         return null;
+    	
     }
     
-    public void addChild(Node<T> child) {
+    public Node<T> addChild(Node<T> child) {
         child.setParent(this);
         children.add(child);
+        return child;
     }
 
     private void setParent(Node<T> parent) {
@@ -77,6 +83,10 @@ public class Node<T> {
             tmp.append(" ");
         }
         return tmp.toString();
+    }
+    
+    public boolean sameData(Node<T> other) {
+    	return this.getData().equals(other.getData());
     }
 
 }
