@@ -2,6 +2,13 @@ package org.entitatemindex.jaxrs.resource;
 
 import static org.junit.Assert.assertEquals;
 
+import org.entitatemindex.factory.Factory;
+import org.entitatemindex.jaxrs.template.JaxrsTemplate;
+import org.entitatemindex.jaxrs.template.JaxrsTemplateFactory;
+import org.entitatemindex.type.Type;
+import org.entitatemindex.type.TypeFactory;
+import org.entitatemindex.uri.GenericUri;
+import org.entitatemindex.uri.GenericUriFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,6 +20,11 @@ public class JaxrsResourceFactoryTest {
     @Before
     public void setUp() {
         jaxrsResourceFactory = new JaxrsResourceFactory();
+        Factory.addCreator(Type.class, new TypeFactory());
+        Factory.addCreator(JaxrsTemplate.class, new JaxrsTemplateFactory());
+        Factory.addCreator(Parameters.class, new ParametersFactory());
+        Factory.addCreator(Parameter.class, new ParameterFactory());
+        Factory.addCreator(GenericUri.class, new GenericUriFactory());
     }
 
  

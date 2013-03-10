@@ -29,7 +29,7 @@ public class JaxrsResourcesFactoryTest {
     @Test
     public void createJaxrsResourcesFromServiceClasses() {
 
-        JaxrsResources jaxrsResources = jaxrsResourcesFactory.createJaxrsResourcesFromServiceClasses(SimpleService.class);
+        JaxrsResources jaxrsResources = jaxrsResourcesFactory. createJaxrsResourcesFromServiceClasses(new Class[] {SimpleService.class});
 
         assertEquals(4, jaxrsResources.size());
 
