@@ -6,15 +6,18 @@ import java.util.List;
 
 import org.entitatemindex.jaxrs.resource.JaxrsResource;
 import org.entitatemindex.uri.UriResource;
+import org.entitatemindex.utils.NodeData;
 import org.entitatemindex.utils.StringUtils;
 
-public class NodeData {
+
+
+public class JaxrsResourceNodeData implements NodeData {
 
 	private List<JaxrsResource> jaxrsResources = new ArrayList<JaxrsResource>();
 
 	private UriResource uriResource;
 
-	protected NodeData(UriResource uriResource) {
+	protected JaxrsResourceNodeData(UriResource uriResource) {
 		this.uriResource = uriResource;
 	}
 
@@ -31,15 +34,15 @@ public class NodeData {
 	}
 
 	@Override
-	public String toString() {
+	public String toString(String identation) {
 		StringBuffer tmp = new StringBuffer();
-
+        tmp.append(identation);
 		tmp.append(uriResource);
 		if (jaxrsResources.size() > 0) {
 			tmp.append("  [");
 			boolean first = true;
 			for (JaxrsResource jaxrsesource : jaxrsResources) {
-				first = StringUtils.addIfNotFirst(first, tmp, ", ");
+				first = StringUtils.addIfFalse(first, tmp, ", ");
 				tmp.append(jaxrsesource.getHttpMethod());
 				tmp.append(" ");
 				tmp.append(jaxrsesource.getTemplate());
@@ -57,7 +60,7 @@ public class NodeData {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		NodeData other = (NodeData) obj;
+		JaxrsResourceNodeData other = (JaxrsResourceNodeData) obj;
 		if (uriResource == null) {
 			if (other.uriResource != null)
 				return false;

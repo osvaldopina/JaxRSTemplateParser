@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.entitatemindex.factory.Factory;
 import org.entitatemindex.uri.GenericUri;
-import org.entitatemindex.utils.StringUtils;
 import org.entitatemindex.utils.UnmodifiableList;
 
 
@@ -24,7 +23,7 @@ public class JaxrsTemplate extends UnmodifiableList<TemplatePart> {
     public JaxrsTemplate(List<TemplatePart> parts) {
         super(parts);
     }
-
+    
     public GenericUri toUri() {
         if (uri == null) {
             uri = Factory.create(GenericUri.class).with(toString());

@@ -2,6 +2,7 @@ package com.test.jaxrstemplate.resources;
 
 import java.util.List;
 
+import org.entitatemindex.entity.EntityTreeData;
 import org.entitatemindex.jaxrs.resource.JaxrsResource;
 import org.entitatemindex.utils.Node;
 
@@ -19,7 +20,7 @@ public class TreeConstructor {
 		
 	}
 	
-	private static void createTree(Node<ResourceTreeData> resourceNode, Node<JaxrsResourceNodeData> jaxrsResourceNode) {
+	private static void createTree(Node<EntityTreeData> resourceNode, Node<JaxrsResourceNodeData> jaxrsResourceNode) {
 //	    for(Node<JaxrsResourceNodeData> child:jaxrsResourceNode.getChildren()) {
 //	        if (child.getData().getResources().isEmpty()) {
 //                ResourceTreeData resourceTreeData;

@@ -1,6 +1,6 @@
 package org.entitatemindex.utils;
 
-public class Tree<T> {
+public class Tree<T extends NodeData> {
 
     private Node<T> root;
 

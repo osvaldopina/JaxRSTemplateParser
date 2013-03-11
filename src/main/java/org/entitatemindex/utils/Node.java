@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Node<T> {
+public class Node<T extends NodeData> {
     
     private T data;
     
@@ -54,7 +54,7 @@ public class Node<T> {
     
     @Override
     public String toString() {
-        return getIdentation() + getData().toString();
+        return getData().toString(getIdentation());
     }
     
     public int getLevel() {

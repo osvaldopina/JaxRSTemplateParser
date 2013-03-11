@@ -17,14 +17,14 @@ public class JaxrsResouceTreeFactory {
 
 	private void addToTree(JaxrsResourceTree resourceTree,
 			JaxrsResource resource) {
-		Node<NodeData> root = resourceTree.getRoot();
+		Node<JaxrsResourceNodeData> root = resourceTree.getRoot();
 		addToTree(root, resource, 0);
 	}
 
-	private void addToTree(Node<NodeData> node, JaxrsResource resource,
+	private void addToTree(Node<JaxrsResourceNodeData> node, JaxrsResource resource,
 			int resourcePartIndex) {
-		Node<NodeData> resourcePartNode = createResourcePartNode(resource, resourcePartIndex);
-		Node<NodeData> currentNode;
+		Node<JaxrsResourceNodeData> resourcePartNode = createResourcePartNode(resource, resourcePartIndex);
+		Node<JaxrsResourceNodeData> currentNode;
 		if (resourcePartAlreadyInTree(node, resourcePartNode)) {
 			currentNode = getNodeAlreadyInTree(node, resourcePartNode);
 		} else {
@@ -37,34 +37,34 @@ public class JaxrsResouceTreeFactory {
 		}
 	}
 
-	private Node<NodeData> getNodeAlreadyInTree(Node<NodeData> node,
-			Node<NodeData> nodeToAdd) {
+	private Node<JaxrsResourceNodeData> getNodeAlreadyInTree(Node<JaxrsResourceNodeData> node,
+			Node<JaxrsResourceNodeData> nodeToAdd) {
 		return node.getChildSameData(nodeToAdd);
 	}
 
-	private Node<NodeData> insertResourcePartNode(Node<NodeData> node,
-			Node<NodeData> nodeToAdd) {
+	private Node<JaxrsResourceNodeData> insertResourcePartNode(Node<JaxrsResourceNodeData> node,
+			Node<JaxrsResourceNodeData> nodeToAdd) {
 		return node.addChild(nodeToAdd);
 	}
 
-	private boolean resourcePartAlreadyInTree(Node<NodeData> node,
-			Node<NodeData> nodeToAdd) {
+	private boolean resourcePartAlreadyInTree(Node<JaxrsResourceNodeData> node,
+			Node<JaxrsResourceNodeData> nodeToAdd) {
 		return node.hasChildSameData(nodeToAdd);
 	}
 
 	private void stokWalkingAndAddJaxrsResource(JaxrsResource resource,
-			Node<NodeData> currentNode) {
+			Node<JaxrsResourceNodeData> currentNode) {
 		currentNode.getData().addJaxrsResource(resource);
 	}
 
 	private void walkNextResourcePart(JaxrsResource resource, int partIndex,
-			Node<NodeData> currentNode) {
+			Node<JaxrsResourceNodeData> currentNode) {
 		addToTree(currentNode, resource, partIndex);
 	}
 
-	private Node<NodeData> createResourcePartNode(JaxrsResource resource,
+	private Node<JaxrsResourceNodeData> createResourcePartNode(JaxrsResource resource,
 			int partIndex) {
-		return new Node<NodeData>(new NodeData(resource
+		return new Node<JaxrsResourceNodeData>(new JaxrsResourceNodeData(resource
 				.getTemplate().toUri().get(partIndex)));
 	}
 

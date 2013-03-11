@@ -6,11 +6,13 @@ public class StringUtils {
 
     }
 
-    public static boolean addIfNotFirst(boolean first, StringBuffer buffer, String value) {
-        if (!first) {
+    public static boolean addIfFalse(boolean control, StringBuffer buffer, String value) {
+        if (!control) {
             buffer.append(value);
         }
         return false;
     }
+    
+    
 
 }

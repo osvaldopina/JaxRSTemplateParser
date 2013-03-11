@@ -1,4 +1,4 @@
-package com.test.jaxrstemplate.resources;
+package org.entitatemindex.entity;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,6 +9,8 @@ import org.entitatemindex.jaxrs.resource.JaxrsResource;
 import org.entitatemindex.type.TypeFactory;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.test.jaxrstemplate.resources.TreeConstructor;
 
 
 public class TreeConstructorTest {

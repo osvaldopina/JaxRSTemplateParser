@@ -85,7 +85,7 @@ public class Creator<T> {
         tmp.append("Could not find method named create* with param types ");
         boolean first = true;
         for (Object param : params) {
-            first = StringUtils.addIfNotFirst(first, tmp, ",");
+            first = StringUtils.addIfFalse(first, tmp, ",");
             tmp.append(param.getClass().getName());
         }
         return tmp.toString();

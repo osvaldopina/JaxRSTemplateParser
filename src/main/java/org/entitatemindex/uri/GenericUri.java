@@ -17,10 +17,14 @@ public class GenericUri extends UnmodifiableList<UriResource>{
         tmp.append("/");
         boolean first = true;
         for(UriResource uriResource:this) {
-            first = StringUtils.addIfNotFirst(first, tmp, "/");
+            first = StringUtils.addIfFalse(first, tmp, "/");
             tmp.append(uriResource.toString());
         }
         return tmp.toString();
+    }
+
+    public UriResource getLastResource() {
+        return get(size()-1);
     }
     
 
