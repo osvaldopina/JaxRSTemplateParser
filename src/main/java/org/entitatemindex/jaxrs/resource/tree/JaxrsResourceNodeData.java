@@ -1,15 +1,14 @@
 package org.entitatemindex.jaxrs.resource.tree;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
+import org.entitatemindex.factory.Factory;
 import org.entitatemindex.jaxrs.resource.JaxrsResource;
+import org.entitatemindex.jaxrs.resource.JaxrsResources;
 import org.entitatemindex.uri.UriResource;
 import org.entitatemindex.utils.NodeData;
 import org.entitatemindex.utils.StringUtils;
-
-
 
 public class JaxrsResourceNodeData implements NodeData {
 
@@ -21,8 +20,8 @@ public class JaxrsResourceNodeData implements NodeData {
 		this.uriResource = uriResource;
 	}
 
-	public List<JaxrsResource> getJaxrsResources() {
-		return Collections.unmodifiableList(jaxrsResources);
+	public JaxrsResources getJaxrsResources() {
+		return Factory.create(JaxrsResources.class).with(jaxrsResources);
 	}
 
 	protected void addJaxrsResource(JaxrsResource jaxrsResource) {

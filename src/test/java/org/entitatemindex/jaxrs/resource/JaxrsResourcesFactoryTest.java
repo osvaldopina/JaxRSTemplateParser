@@ -13,6 +13,15 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 
+import org.entitatemindex.factory.Factory;
+import org.entitatemindex.jaxrs.template.JaxrsTemplate;
+import org.entitatemindex.jaxrs.template.JaxrsTemplateFactory;
+import org.entitatemindex.type.CollectionType;
+import org.entitatemindex.type.CollectionTypeFactory;
+import org.entitatemindex.type.Type;
+import org.entitatemindex.type.TypeFactory;
+import org.entitatemindex.uri.GenericUri;
+import org.entitatemindex.uri.GenericUriFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,6 +33,13 @@ public class JaxrsResourcesFactoryTest {
     @Before
     public void setUp() {
         jaxrsResourcesFactory = new JaxrsResourcesFactory();
+        Factory.addCreator(CollectionType.class,new CollectionTypeFactory());
+        Factory.addCreator(JaxrsResource.class,new JaxrsResourceFactory());
+        Factory.addCreator(JaxrsTemplate.class,new JaxrsTemplateFactory());
+        Factory.addCreator(GenericUri.class,new GenericUriFactory());
+        Factory.addCreator(Type.class,new TypeFactory());
+        Factory.addCreator(Parameters.class,new ParametersFactory());
+        Factory.addCreator(Parameter.class,new ParameterFactory());
     }
 
     @Test

@@ -5,12 +5,14 @@ import java.lang.reflect.Type;
 
 public enum CollectionType {
 
-    LIST("LIST<%1$s>"), SET("SET<%1$s>"), NONE("%1$s");
+    LIST("LIST<%1$s>", true), SET("SET<%1$s>", true), NONE("%1$s", false);
 
     private String format;
+    private boolean collection;
 
-    private CollectionType(String format) {
+    private CollectionType(String format, boolean collection) {
         this.format = format;
+        this.collection = collection;
     }
 
 
@@ -22,7 +24,10 @@ public enum CollectionType {
         } else {
             return (Class<?>) type;
         }
-
+    }
+    
+    public boolean isCollection() {
+        return collection;
     }
 
     public String toString(Class<?> javaClass) {

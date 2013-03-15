@@ -3,32 +3,19 @@ package org.entitatemindex.factory;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.util.List;
-
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class FactoryTest {
 
     private MyCreator myCreator;
-    private static List<Creator<?>> creators;
     
     
     @Before
     public void setUp() throws Exception {
         myCreator = new MyCreator();
-        creators = Factory.getCreators();
-        Factory.clear();
     }
 
-
-    @After
-    public void tearDown() throws Exception {
-        Factory.addCreators(creators);
-    }
-    
-    
     @Test
     public void addCreator() {
         Factory.addCreator(String.class, myCreator);
@@ -37,19 +24,26 @@ public class FactoryTest {
 
     }
 
-    @Test(expected=FactoryError.class)
-    public void clear() {
-        Factory.addCreator(String.class, myCreator);
-        Factory.clear();
-        Factory.create(String.class);
-    }
-
     @Test
     public void create() {
         Factory.addCreator(String.class, myCreator);
         assertEquals("25", Factory.create(String.class).with("25"));
     }
+    
+    @Test
+    public void createVarArgs() {
+        Factory.addCreator(String.class, myCreator);
+        assertEquals("12", Factory.create(String.class).with(Integer.valueOf("1"),Integer.valueOf("2")));
+    }
 
+
+    @Test
+    public void createPrimitivesAndWrappers() {
+        Factory.addCreator(String.class, myCreator);
+        assertEquals("12", Factory.create(String.class).with(1,2));
+    }
+    
+    
     @Test(expected=FactoryError.class)
     public void createNoCreatorFoundForType() {
         Factory.addCreator(String.class, myCreator);
@@ -66,6 +60,14 @@ public class FactoryTest {
 
         public String createStringFromInteger(Integer value) {
             return value.toString();
+        }
+        
+        public String createStringFromIntegerArray(Integer...integers) {
+            StringBuffer tmp = new StringBuffer();
+            for(Integer i:integers) {
+                tmp.append(i);
+            }
+            return tmp.toString();
         }
 
     }

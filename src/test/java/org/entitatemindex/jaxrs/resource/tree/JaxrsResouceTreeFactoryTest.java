@@ -20,13 +20,13 @@ import org.junit.Test;
 
 public class JaxrsResouceTreeFactoryTest {
 
-    private JaxrsResouceTreeFactory jaxrsResouceTreeFactory;
+    private JaxrsResourceTreeFactory jaxrsResouceTreeFactory;
     private JaxrsResourcesFactory jaxrsResourcesFactory;
     private JaxrsResources jaxrsResources;
 
     @Before
     public void setUp() throws Exception {
-        jaxrsResouceTreeFactory = new JaxrsResouceTreeFactory();
+        jaxrsResouceTreeFactory = new JaxrsResourceTreeFactory();
         jaxrsResourcesFactory = new JaxrsResourcesFactory();
         
         Factory.addCreator(JaxrsResource.class, new JaxrsResourceFactory());

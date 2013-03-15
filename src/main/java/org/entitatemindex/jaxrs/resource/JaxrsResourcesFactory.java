@@ -9,6 +9,11 @@ import org.entitatemindex.factory.Factory;
 
 public class JaxrsResourcesFactory {
 
+    public JaxrsResources createJaxrsResourcesFromResourceList(List<JaxrsResource> resources) {
+        return new JaxrsResources(resources);
+    }
+    
+    
     public JaxrsResources createJaxrsResourcesFromServiceClasses(Class<?>[] serviceClasses) {
 
         List<JaxrsResource> resources = new ArrayList<JaxrsResource>();
@@ -17,7 +22,7 @@ public class JaxrsResourcesFactory {
             resources.addAll(getResourcesFromServiceClass(serviceClass));
         }
 
-        return Factory.create(JaxrsResources.class).with(resources);
+        return new JaxrsResources(resources);
     }
 
     public JaxrsResources createJaxrsResourcesFromResourcesString(String[] resourcesAsString) {

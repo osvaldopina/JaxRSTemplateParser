@@ -4,7 +4,7 @@ import org.entitatemindex.jaxrs.resource.JaxrsResource;
 import org.entitatemindex.jaxrs.resource.JaxrsResources;
 import org.entitatemindex.utils.Node;
 
-public class JaxrsResouceTreeFactory {
+public class JaxrsResourceTreeFactory {
 
 	public JaxrsResourceTree createFromJaxrsResources(
 			JaxrsResources jaxrsResources) {

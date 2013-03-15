@@ -2,5 +2,5 @@ package org.entitatemindex.entity;
 
 public enum Operation {
     
-    SEARCH, READ, CREATE, UPDATE
+    SEARCH, READ, CREATE, UPDATE, DELETE
 }

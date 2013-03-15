@@ -20,14 +20,7 @@ public class Factory {
         }
     }
         
-    protected static void clear() {
-        creators.clear();
-    }
-    
-    protected static void addCreators(List<Creator<?>> creators) {
-        Factory.creators.addAll(creators);
-    }
-    
+   
     protected static List<Creator<?>> getCreators() {
         return Collections.unmodifiableList(creators);
     }

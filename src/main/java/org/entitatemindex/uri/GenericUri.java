@@ -24,7 +24,12 @@ public class GenericUri extends UnmodifiableList<UriResource>{
     }
 
     public UriResource getLastResource() {
-        return get(size()-1);
+        if (size() ==0) {
+            return new UriResource("/");
+        }
+        else {
+          return get(size()-1);
+        }
     }
     
 

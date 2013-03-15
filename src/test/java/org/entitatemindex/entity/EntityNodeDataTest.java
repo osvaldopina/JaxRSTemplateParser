@@ -19,7 +19,7 @@ import org.entitatemindex.utils.Node;
 import org.junit.Before;
 import org.junit.Test;
 
-public class EntityTreeDataTest {
+public class EntityNodeDataTest {
     
     @Before
     public void setUp() {
@@ -34,28 +34,28 @@ public class EntityTreeDataTest {
     @Test
     public void testToString() {
 
-        EntityTreeData data = new EntityTreeData(Factory.create(GenericUri.class).with("/invoice"));
-        data.addOperation(
+        EntityNodeData data = new EntityNodeData(Factory.create(GenericUri.class).with("/invoice"), Factory.create(Type.class).with(String.class));
+        data.getEntityOperations().addOperation(
                 Operation.SEARCH,
                 Factory.create(JaxrsResource.class)
                         .with("LIST<java.lang.String> void GET /invoice path-params[] query-params[customer-name:java.lang.String]"));
         
-        data.addOperation(
+        data.getEntityOperations().addOperation(
                 Operation.READ,
                 Factory.create(JaxrsResource.class).with(
                         "java.lang.String void GET /invoice/{invoice-id} path-params[invoice-id:int] query-params[]"));
         
-        data.addOperation(
+        data.getEntityOperations().addOperation(
                 Operation.CREATE,
                 Factory.create(JaxrsResource.class).with(
                         "java.lang.String java.lang.String POST /invoice path-params[] query-params[]"));
         
-        data.addOperation(
+        data.getEntityOperations().addOperation(
                 Operation.UPDATE,
                 Factory.create(JaxrsResource.class).with(
                         "void java.lang.String PUT /invoice/{invoice-id} path-params[invoice-id:int] query-params[]"));
 
-        Node<EntityTreeData> node = new Node<EntityTreeData>(data);
+        Node<EntityNodeData> node = new Node<EntityNodeData>(data);
         
         EntityTree entityTree = new EntityTree(node);
 

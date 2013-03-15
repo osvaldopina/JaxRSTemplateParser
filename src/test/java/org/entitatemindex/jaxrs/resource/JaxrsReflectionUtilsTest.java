@@ -14,17 +14,30 @@ import javax.ws.rs.QueryParam;
 
 import org.entitatemindex.factory.Factory;
 import org.entitatemindex.type.CollectionType;
+import org.entitatemindex.type.CollectionTypeFactory;
 import org.entitatemindex.type.Type;
+import org.entitatemindex.type.TypeFactory;
+import org.junit.Before;
 import org.junit.Test;
 
 
 
 public class JaxrsReflectionUtilsTest {
+    
+    
+    
+    @Before
+    public void setUp() {
+        Factory.addCreator(CollectionType.class, new CollectionTypeFactory());
+        Factory.addCreator(Type.class, new TypeFactory());
+        Factory.addCreator(Parameters.class,new ParametersFactory());
+    }
+    
 
     @Test
     public void getHttpMethodSearchResource() throws Exception {
 
-        assertEquals("GET", JaxrsReflectionUtils.getHttpMethod(MyServiceClass.class.getDeclaredMethod("searchResource",
+        assertEquals(HttpMethod.GET, JaxrsReflectionUtils.getHttpMethod(MyServiceClass.class.getDeclaredMethod("searchResource",
                 int.class, List.class)));
 
     }
@@ -32,7 +45,7 @@ public class JaxrsReflectionUtilsTest {
     @Test
     public void getHttpMethodCreateResource() throws Exception {
 
-        assertEquals("POST", JaxrsReflectionUtils.getHttpMethod(MyServiceClass.class.getDeclaredMethod("createResource",
+        assertEquals(HttpMethod.POST, JaxrsReflectionUtils.getHttpMethod(MyServiceClass.class.getDeclaredMethod("createResource",
                 String.class)));
 
     }
