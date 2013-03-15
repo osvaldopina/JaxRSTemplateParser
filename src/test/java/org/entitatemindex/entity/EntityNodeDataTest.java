@@ -34,7 +34,7 @@ public class EntityNodeDataTest {
     @Test
     public void testToString() {
 
-        EntityNodeData data = new EntityNodeData(Factory.create(GenericUri.class).with("/invoice"), Factory.create(Type.class).with(String.class));
+        EntityNodeData data = new EntityNodeData(Factory.create(GenericUri.class).with("/invoice"), String.class);
         data.getEntityOperations().addOperation(
                 Operation.SEARCH,
                 Factory.create(JaxrsResource.class)
@@ -61,11 +61,11 @@ public class EntityNodeDataTest {
 
         StringBuffer expected = new StringBuffer();
 
-        expected.append("Entity[invoice]\n");
-        expected.append("  Operation[SEARCH]   LIST<java.lang.String> void GET /invoice path-params[] query-params[customer-name:java.lang.String]\n");
-        expected.append("  Operation[READ]   java.lang.String void GET /invoice/{invoice-id} path-params[invoice-id:int] query-params[]\n");
-        expected.append("  Operation[CREATE]   java.lang.String java.lang.String POST /invoice path-params[] query-params[]\n");
-        expected.append("  Operation[UPDATE]   void java.lang.String PUT /invoice/{invoice-id} path-params[invoice-id:int] query-params[]\n");
+        expected.append("Entity[invoice] (java.lang.String)\n");
+        expected.append(" Operation[SEARCH]   LIST<java.lang.String> void GET /invoice path-params[] query-params[customer-name:java.lang.String]\n");
+        expected.append(" Operation[READ]   java.lang.String void GET /invoice/{invoice-id} path-params[invoice-id:int] query-params[]\n");
+        expected.append(" Operation[CREATE]   java.lang.String java.lang.String POST /invoice path-params[] query-params[]\n");
+        expected.append(" Operation[UPDATE]   void java.lang.String PUT /invoice/{invoice-id} path-params[invoice-id:int] query-params[]\n");
 
         assertEquals(expected.toString(), entityTree.toString());
 

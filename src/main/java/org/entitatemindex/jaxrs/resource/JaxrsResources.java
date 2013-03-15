@@ -11,16 +11,15 @@ public class JaxrsResources extends UnmodifiableList<JaxrsResource> {
     private Type type;
 
     // TODO refator and test this!!!!
+    // TODO type.equals for class verification (maybe someting like compatibles...)
     protected JaxrsResources(Collection<JaxrsResource> resources) {
         super(resources);
         for (JaxrsResource resource : resources) {
             if (type == null) {
                 type = getType(resource);
             } else {
-                if (getType(resource) != null && type.equals(getType(resource))) {
+                if (getType(resource) != null && (!type.getJavaClass().equals(getType(resource).getJavaClass()))) {
                     throw new EntitatemIndexError("Cound not determine type for resource list " + toString());
-                } else {
-                    type = getType(resource);
                 }
             }
         }

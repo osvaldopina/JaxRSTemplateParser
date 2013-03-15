@@ -52,7 +52,7 @@ public class EntityTreeConstructorTest {
 
         expected.append("Entity[/]\n");
         expected.append("  Entity[a]\n");
-        expected.append("    Entity[invoice] (LIST<java.lang.String>)\n");
+        expected.append("    Entity[invoice] (java.lang.String)\n");
         expected.append("     Operation[SEARCH]   LIST<java.lang.String> void GET /a/invoice path-params[] query-params[customer-name:java.lang.String]\n");
 
         assertEquals(expected.toString(), entityTree.toString());

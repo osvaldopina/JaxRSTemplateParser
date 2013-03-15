@@ -59,11 +59,11 @@ public class EntityTreeFactory {
                         currentEntity =
                                 new Node<EntityNodeData>(new EntityNodeData(Factory.create(GenericUri.class).with(
                                         jaxrsChildNode.getData().getUriResource().toString()), jaxrsChildNode.getData()
-                                        .getJaxrsResources().getType()));
+                                        .getJaxrsResources().getType().getJavaClass()));
                         entityNode.addChild(currentEntity);
                     } else {
                         currentEntity = entityNode;
-                        currentEntity.getData().setType(jaxrsChildNode.getData().getJaxrsResources().getType());
+                        currentEntity.getData().setType(jaxrsChildNode.getData().getJaxrsResources().getType().getJavaClass());
                     }
                     for (JaxrsResource jaxrsResouce : jaxrsChildNode.getData().getJaxrsResources()) {
                         if (jaxrsResouce.getHttpMethod() == HttpMethod.GET) {

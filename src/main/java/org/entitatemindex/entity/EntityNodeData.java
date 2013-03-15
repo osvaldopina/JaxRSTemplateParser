@@ -1,6 +1,5 @@
 package org.entitatemindex.entity;
 
-import org.entitatemindex.type.Type;
 import org.entitatemindex.uri.GenericUri;
 import org.entitatemindex.utils.NodeData;
 
@@ -10,22 +9,22 @@ public class EntityNodeData implements NodeData {
 
     private EntityOperations entityOperations;
 
-    private Type entityType;
+    private Class<?> type;
 
     public EntityNodeData(GenericUri uri) {
         this.uri = uri;
         this.entityOperations = new EntityOperations();
     }
 
-    public EntityNodeData(GenericUri uri, Type entityType) {
+    public EntityNodeData(GenericUri uri, Class<?> type) {
         this.uri = uri;
-        this.entityType = entityType;
+        this.type = type;
         this.entityOperations = new EntityOperations();
     }
 
-    public EntityNodeData(GenericUri uri, Type entityType, EntityOperations entityOperations) {
+    public EntityNodeData(GenericUri uri, Class<?> type, EntityOperations entityOperations) {
         this.uri = uri;
-        this.entityType = entityType;
+        this.type = type;
         this.entityOperations = entityOperations;
     }
 
@@ -37,12 +36,12 @@ public class EntityNodeData implements NodeData {
         return entityOperations;
     }
 
-    public Type getType() {
-        return entityType;
+    public Class<?> getType() {
+        return type;
     }
     
-    public void setType(Type type) {
-        this.entityType = type;
+    public void setType(Class<?> type) {
+        this.type = type;
     }
 
 
@@ -59,9 +58,9 @@ public class EntityNodeData implements NodeData {
         tmp.append("Entity[");
         tmp.append(uri.getLastResource());
         tmp.append("]");
-        if (entityType != null) {
+        if (type != null) {
             tmp.append(" (");
-            tmp.append(entityType);
+            tmp.append(type.getName());
             tmp.append(")");
         }
         if ((entityOperations != null) && (!entityOperations.isEmpty())) {

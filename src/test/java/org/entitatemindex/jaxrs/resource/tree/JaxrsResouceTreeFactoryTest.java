@@ -75,8 +75,8 @@ public class JaxrsResouceTreeFactoryTest {
     public void twoResources1Level() {
         jaxrsResources =
                 jaxrsResourcesFactory.createJaxrsResourcesFromResourcesString(new String[] {
-                        "void void GET /a path-params[] query-params[]",//
-                        "void void PUT /a path-params[] query-params[]"});
+                        "java.lang.String void GET /a path-params[] query-params[]",//
+                        "void java.lang.String PUT /a path-params[] query-params[]"});
 
         JaxrsResourceTree resourceTree = jaxrsResouceTreeFactory.createFromJaxrsResources(jaxrsResources);
 
@@ -92,8 +92,8 @@ public class JaxrsResouceTreeFactoryTest {
     public void twoResources2Level() {
         jaxrsResources =
                 jaxrsResourcesFactory.createJaxrsResourcesFromResourcesString(new String[] {
-                        "void void GET /a/b path-params[] query-params[]",//
-                        "void void PUT /a path-params[] query-params[]"});
+                        "java.lang.String void GET /a/b path-params[] query-params[]",//
+                        "void java.lang.String PUT /a path-params[] query-params[]"});
 
         JaxrsResourceTree resourceTree = jaxrsResouceTreeFactory.createFromJaxrsResources(jaxrsResources);
 
@@ -110,8 +110,8 @@ public class JaxrsResouceTreeFactoryTest {
     public void threeResources5Level() {
         jaxrsResources =
                 jaxrsResourcesFactory.createJaxrsResourcesFromResourcesString(new String[] {
-                        "void void GET /a/b/c path-params[] query-params[]",//
-                        "void void GET /a/c/d path-params[] query-params[]"});
+                        "java.lang.String void GET /a/b/c path-params[] query-params[]",//
+                        "java.lang.String void GET /a/c/d path-params[] query-params[]"});
 
 
         JaxrsResourceTree resourceTree = jaxrsResouceTreeFactory.createFromJaxrsResources(jaxrsResources);
